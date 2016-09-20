@@ -27,19 +27,14 @@ public class Search extends AppCompatActivity {
     String URL = "http://geo.groupkt.com/ip/111.93.41.242/json";
 //    http://geo.groupkt.com/ip/172.217.3.14/json
 
-
     // Google Map
     private GoogleMap googleMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-//        init(1,0);
     }
-
 
     private void init(double latitude, double longitude) {
 
