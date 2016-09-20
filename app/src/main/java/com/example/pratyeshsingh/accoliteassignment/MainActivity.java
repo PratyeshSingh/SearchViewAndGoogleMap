@@ -3,6 +3,7 @@ package com.example.pratyeshsingh.accoliteassignment;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -118,12 +119,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-
-
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(this, Search.class));
+            return false;
+        } else
+            return super.onOptionsItemSelected(item);
     }
 }

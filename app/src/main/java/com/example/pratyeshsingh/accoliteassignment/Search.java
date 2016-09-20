@@ -128,6 +128,8 @@ public class Search extends AppCompatActivity {
                         init(Double.parseDouble(mMapContent.getLatitude()), Double.parseDouble(mMapContent.getLongitude()));
                     } catch (JSONException e) {
                         e.printStackTrace();
+                    } catch (Exception e) {
+
                     }
                 } else
                     Toast.makeText(Search.this, getResources().getString(R.string.internal_error), Toast.LENGTH_LONG).show();
