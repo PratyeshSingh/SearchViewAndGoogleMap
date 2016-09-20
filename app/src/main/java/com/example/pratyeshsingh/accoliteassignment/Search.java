@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -22,54 +23,57 @@ import org.json.JSONObject;
 
 import java.util.Hashtable;
 
-public class Search extends AppCompatActivity {
+public class Search extends AppCompatActivity implements OnMapReadyCallback {
 
     String URL = "http://geo.groupkt.com/ip/111.93.41.242/json";
 //    http://geo.groupkt.com/ip/172.217.3.14/json
 
     // Google Map
-    private GoogleMap googleMap;
+    private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(0, 0);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     private void init(double latitude, double longitude) {
 
+        // check if map is created successfully or not
+        if (mMap == null) {
+            Toast.makeText(this, "Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
+        } else {
 
-//        // latitude and longitude
-//        double latitude = 13.912817;// 13.98204587;
-//        double longitude = 100.549049;// 100.85586548;
+            // create marker
+            MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("IMPACT Exhibition and Convention Center, Hall 2, 3 & 4, Bangkok, Thailand");
 
+            // ROSE color icon
+            marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
-        // getChildFragmentManager().findFragmentById(R.id.map);
-        // getFragmentManager().findFragmentById(R.id.map);
-        if (googleMap == null) {
-//            googleMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
-            googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+            // adding marker
+            mMap.addMarker(marker);
 
-            // check if map is created successfully or not
-            if (googleMap == null) {
-                Toast.makeText(this, "Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
-            } else {
+            // Moving Camera to a Location with animation
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(marker.getPosition()).zoom(12).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                // create marker
-                MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("IMPACT Exhibition and Convention Center, Hall 2, 3 & 4, Bangkok, Thailand");
-
-                // ROSE color icon
-                marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-
-                // adding marker
-                googleMap.addMarker(marker);
-
-                // Moving Camera to a Location with animation
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(marker.getPosition()).zoom(12).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-                /*** ----------------------------------------- */
-            }
+            /*** ----------------------------------------- */
         }
     }
 

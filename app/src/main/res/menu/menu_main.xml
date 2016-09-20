@@ -4,9 +4,9 @@
     xmlns:appcompat="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_search_IP"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_search_Ip"
         app:showAsAction="never" />
 
     <item

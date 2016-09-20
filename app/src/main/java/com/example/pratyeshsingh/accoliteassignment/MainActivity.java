@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.action_settings) {
+        if (item.getItemId() == R.id.action_search_IP) {
             startActivity(new Intent(this, Search.class));
             return false;
         } else

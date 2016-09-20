@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">AccoliteAssignment</string>
     <string name="search_hint">Search items</string>
-    <string name="action_settings">Setting</string>
+    <string name="action_search_Ip">IP Search</string>
     <string name="menu_search">Search</string>
     <string name="search_result">Search Resource</string>
 
     <string name="internal_error">Some Internal Server Error</string>
     <string name="no_internet_connection_found">No Internet connection found</string>
-
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCtIBAsOrfjAJUKqAfnvKI_XYv_YbwU1GM</string>
 </resources>
